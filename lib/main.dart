@@ -31,24 +31,25 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: FutureBuilder(
-              future: getUserData(),
-              builder: (context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.waiting:
-                    return const CircularProgressIndicator();
-                  default:
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else if (snapshot.data!.token == null)
-                      return Login();
-                    else {
-                      UserPreferences().removeUser();
-                    }
-                    return Welcome(user: snapshot.data, );
-                }
-              }),
+          home: FutureBuilder<User?>(
+            future: getUserData(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const CircularProgressIndicator();
+                default:
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else if (snapshot.data!.token == null)
+                    return Login();
+                  else {
+                    UserPreferences().removeUser();
+                  }
+                  return Welcome(user: snapshot.data);
+              }
+            },
+          ),
           routes: {
             '/dashboard': (context) => DashBoard(),
             '/login': (context) => Login(),

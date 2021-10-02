@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 MaterialButton longButtons(String title, Function fun,
     {Color color: const Color(0xfff063057), Color textColor: Colors.white}) {
   return MaterialButton(
-    onPressed: fun(),
+    onPressed: () {
+      fun();
+    },
     textColor: textColor,
     color: color,
     child: SizedBox(

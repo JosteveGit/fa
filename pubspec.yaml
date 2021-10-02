@@ -30,7 +30,7 @@ dependencies:
   provider:
   http:
   shared_preferences:
-  flushbar:
+  # flushbar:
   flutter:
     sdk: flutter
 

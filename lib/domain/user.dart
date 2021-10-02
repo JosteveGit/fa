@@ -1,11 +1,11 @@
 class User {
   int userId;
-  String first_name;
-  String last_name;
-  String email;
-  String phone_number;
-  String token;
-  String renewalToken;
+  String? first_name;
+  String? last_name;
+  String? email;
+  String? phone_number;
+  String? token;
+  String? renewalToken;
 
   User({required this.userId, required this.last_name, required this.first_name, required this.email, required this.phone_number,
     required this.renewalToken,

@@ -1,4 +1,3 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/providers/auth.dart';
@@ -65,8 +64,9 @@ class _LoginState extends State<Login> {
       ],
     );
 
-    var doLogin = () {
+    doLogin() {
       final form = formKey.currentState;
+      print(form);
 
       if (form!.validate()) {
         form.save();
@@ -80,17 +80,19 @@ class _LoginState extends State<Login> {
             Provider.of<UserProvider>(context, listen: false).setUser(user);
             Navigator.pushReplacementNamed(context, '/dashboard');
           } else {
-            Flushbar(
-              title: "Failed Login",
-              message: response['message']['message'].toString(),
-              duration: Duration(seconds: 3),
-            ).show(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Failed Loginf"),
+              ),
+            );
           }
         });
       } else {
         print("form is invalid");
       }
-    };
+    }
+
+    ;
 
     return SafeArea(
       child: Scaffold(

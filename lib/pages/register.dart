@@ -1,4 +1,3 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/domain/user.dart';
 import 'package:frontend/providers/auth.dart';
@@ -15,7 +14,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final formKey = new GlobalKey<FormState>();
 
- late  String _email, _password, _confirmPassword;
+  late String _email, _password, _confirmPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -55,28 +54,27 @@ class _RegisterState extends State<Register> {
     var doRegister = () {
       final form = formKey.currentState;
       if (form!.validate()) {
-        form!.save();
+        form.save();
         auth.register(_email, _password, _confirmPassword).then((response) {
-          if (response['status']) {
+          if (response!['status']) {
             User user = response['data'];
             Provider.of<UserProvider>(context, listen: false).setUser(user);
             Navigator.pushReplacementNamed(context, '/dashboard');
           } else {
-            Flushbar(
-              title: "Registration Failed",
-              message: response.toString(),
-              duration: Duration(seconds: 10),
-            ).show(context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Registration failed"),
+              ),
+            );
           }
         });
       } else {
-        Flushbar(
-          title: "Invalid form",
-          message: "Please Complete the form properly",
-          duration: Duration(seconds: 10),
-        ).show(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Invalid form"),
+          ),
+        );
       }
-
     };
 
     return SafeArea(

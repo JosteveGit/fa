@@ -23,7 +23,7 @@ class _DashBoardState extends State<DashBoard> {
       body: Column(
         children: [
           SizedBox(height: 100,),
-          Center(child: Text(user.email)),
+          Center(child: Text(user.email!)),
           SizedBox(height: 100),
           RaisedButton(onPressed: (){}, child: Text("Logout"), color: Colors.lightBlueAccent,)
         ],

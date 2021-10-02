@@ -6,13 +6,13 @@ import 'package:provider/provider.dart';
 
 class Welcome extends StatelessWidget {
 // const ({Key? key}) : super(key: key);
-  final User user;
+  final User? user;
 
-  const Welcome({required Key key, required this.user}) : super(key: key);
+  const Welcome({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserProvider>(context).setUser(user);
+    Provider.of<UserProvider>(context).setUser(user!);
 
     return Scaffold(
       body: Container(
